@@ -495,7 +495,7 @@ class AccessControlMixin(object):
         perm = self._get_request_ability_cache(request).get((model_name, pk, ability), None)
         if perm is None:
             manager = AccessManager(obj.__class__)
-            perm = bool(manager.apply_able(ability, obj.__class__.objects.filter(id=obj.id), request).exists())
+            perm = bool(manager.apply_able(ability, obj.__class__.objects.filter(id=obj.id), request))
             self._get_request_ability_cache(request)[(model_name, pk, ability)] = perm
         return perm
 
